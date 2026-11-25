@@ -1,0 +1,925 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentEasy - Rent Anything You Need</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #171536;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            box-shadow: 0 2px 12px #0000000d;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #5B2CC9;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #5B2CC9;
+        }
+
+        .hero {
+            padding: 85px 7%;
+            background: linear-gradient(120deg, #EEE8FF, #ffffff);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 35px;
+        }
+
+        .hero-content {
+            max-width: 570px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #5B2CC9;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #5B2CC9;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-image {
+            width: 43%;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        .section {
+            padding: 65px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 35px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .category {
+            background: #F7F4FF;
+            padding: 30px 15px;
+            text-align: center;
+            border-radius: 14px;
+            font-weight: bold;
+            color: #5B2CC9;
+            font-size: 17px;
+        }
+
+        .category span {
+            display: block;
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 14px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 5px 20px #0000000b;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            color: #5B2CC9;
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-info button {
+            width: 100%;
+        }
+
+        footer {
+            background: #171536;
+            color: white;
+            padding: 35px 7%;
+            text-align: center;
+            line-height: 2;
+        }
+
+        @media(max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-image {
+                width: 100%;
+            }
+        }
+
+/* ===== PROFESSIONAL ADMIN DASHBOARD ===== */
+
+.admin-section {
+    padding: 70px 5%;
+    background: #f7f5ff;
+    min-height: 400px;
+}
+
+.admin-section .section-title,
+.admin-section h2 {
+    text-align: center;
+    color: #171536;
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.admin-section > p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 35px;
+}
+
+.admin-section h3 {
+    color: #171536;
+    margin: 30px 0 18px;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(180px, 240px));
+    justify-content: center;
+    gap: 25px;
+    margin: 30px 0 45px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(40, 20, 90, 0.08);
+    border: 1px solid #eee8ff;
+}
+
+.stat-card h3 {
+    color: #5B2CC9;
+    font-size: 32px;
+    margin: 0 0 8px;
+}
+
+.stat-card p {
+    color: #666;
+    margin: 0;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(40, 20, 90, 0.08);
+    border: 1px solid #e8e2f5;
+}
+
+#admin table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#admin th,
+#admin td {
+    padding: 16px 12px;
+    text-align: center;
+    border-bottom: 1px solid #eeeaf5;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+#admin th {
+    background: #5B2CC9;
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#admin td {
+    color: #39344b;
+}
+
+#admin tbody tr:nth-child(even) {
+    background: #faf9ff;
+}
+
+#admin tbody tr:hover {
+    background: #f0ebff;
+}
+
+#admin tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#admin td:last-child {
+    color: #16834a;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .admin-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 18px 10px;
+    }
+
+    .admin-section {
+        padding: 45px 4%;
+    }
+}
+#admin {
+    display: none;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+.about-content {
+    background: #f5f0ff;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.about-content h3 {
+    color: #5B2CC9;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.about-content p {
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.about-feature {
+    background: white;
+    padding: 25px 18px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(40, 20, 90, 0.08);
+}
+
+.about-feature span {
+    font-size: 32px;
+}
+
+.about-feature h3 {
+    color: #5B2CC9;
+    margin: 12px 0;
+}
+
+.about-feature p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.about-cta {
+    background: #5B2CC9;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+.about-cta h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.about-cta p {
+    margin-bottom: 20px;
+}
+
+.about-cta .btn {
+    display: inline-block;
+    background: white;
+    color: #5B2CC9;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .about-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">RentEasy.</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">All Products</a>
+        <a href="#about">About Us</a>
+        <a href="/admin-login.html">Admin Login</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Rent Anything.<br><span>Anytime, Anywhere.</span></h1>
+        <p>
+            Need something for a short time? Rent it easily with RentEasy.
+            Discover affordable products, book in a few clicks and enjoy more
+            without buying more.
+        </p>
+        <a href="#products" class="btn">Explore Products</a>
+    </div>
+
+    <img class="hero-image"
+         src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85"
+         alt="Rental products">
+</section>
+
+<section class="section" id="categories">
+    <h2 class="section-title">Browse Categories</h2>
+    <p class="section-subtitle">Find exactly what you need</p>
+
+    <div class="categories">
+    <div class="category" onclick="filterCategory('Sports')">
+        <span>🏏</span>Sports
+    </div>
+
+    <div class="category" onclick="filterCategory('Electronics')">
+        <span>💻</span>Electronics
+    </div>
+
+    <div class="category" onclick="filterCategory('Bicycles')">
+        <span>🚲</span>Bicycles
+    </div>
+
+    <div class="category" onclick="filterCategory('Event Equipment')">
+        <span>🔊</span>Event Equipment
+    </div>
+</div>
+</section>
+
+<section class="section" id="products">
+    <h2 class="section-title">Popular Rental Products</h2>
+    <p class="section-subtitle">Quality products at affordable daily prices</p>
+
+    <div class="search-box">
+        <input type="text" id="searchInput"
+               placeholder="Search products...">
+        <button class="btn" onclick="searchProducts()">Search</button>
+    </div>
+
+    <div class="products" id="productList">
+        Loading products...
+    </div>
+</section>
+
+
+<section class="section" id="booking" style="background:#F7F4FF;">
+    <h2 class="section-title">Book Your Rental</h2>
+    <p class="section-subtitle">Complete your booking in a few simple steps</p>
+
+    <div style="max-width:600px;margin:auto;background:white;padding:30px;border-radius:15px;box-shadow:0 5px 20px #00000010;">
+
+        <form id="bookingForm">
+
+            <label>Select Product</label>
+            <select id="bookingProduct" required
+                style="width:100%;padding:13px;margin:10px 0 20px;border:1px solid #ddd;border-radius:8px;">
+                <option value="">Choose a product</option>
+            </select>
+
+            <label>Your Name</label>
+            <input type="text" id="customerName" required
+                placeholder="Enter your full name"
+                style="width:100%;padding:13px;margin:10px 0 20px;border:1px solid #ddd;border-radius:8px;">
+
+            <label>Email Address</label>
+            <input type="email" id="customerEmail" required
+                placeholder="Enter your email"
+                style="width:100%;padding:13px;margin:10px 0 20px;border:1px solid #ddd;border-radius:8px;">
+
+            <label>Start Date</label>
+            <input type="date" id="startDate" required
+                style="width:100%;padding:13px;margin:10px 0 20px;border:1px solid #ddd;border-radius:8px;">
+
+            <label>End Date</label>
+            <input type="date" id="endDate" required
+                style="width:100%;padding:13px;margin:10px 0 20px;border:1px solid #ddd;border-radius:8px;">
+
+            <div id="pricePreview" style="font-size:19px;font-weight:bold;color:#5B2CC9;margin-bottom:20px;">
+                Estimated Total: ₹0
+            </div>
+
+            <button type="submit" class="btn" style="width:100%;">
+                Confirm Booking
+            </button>
+
+            <p id="bookingMessage" style="margin-top:15px;text-align:center;"></p>
+
+        </form>
+    </div>
+</section>
+
+
+<section class="section" id="about">
+
+    <h2 class="section-title">About RentEasy</h2>
+
+    <p class="section-subtitle">
+        Your Needs, Our Rental Solutions!
+    </p>
+
+    <div class="about-container">
+
+        <div class="about-content">
+            <h3>Making Renting Easy, Affordable & Convenient</h3>
+
+            <p>
+                At RentEasy, we believe that you don't need to buy
+                everything you need. Sometimes, renting is the smarter
+                and more affordable choice.
+            </p>
+
+            <p>
+                RentEasy is an online rental marketplace that connects
+                people who need products with people who have products
+                to rent. From sports equipment and electronics to
+                bicycles and event essentials, we bring rental options
+                together on one convenient platform.
+            </p>
+
+            <p>
+                Our goal is to make renting simple, save money for
+                customers and encourage the smart use of available
+                resources.
+            </p>
+        </div>
+
+        <div class="about-features">
+
+            <div class="about-feature">
+                <span>💰</span>
+                <h3>Save Money</h3>
+                <p>Rent products instead of spending more on buying them.</p>
+            </div>
+
+            <div class="about-feature">
+                <span>📦</span>
+                <h3>Multiple Categories</h3>
+                <p>Explore electronics, sports equipment, bicycles and more.</p>
+            </div>
+
+            <div class="about-feature">
+                <span>📅</span>
+                <h3>Easy Booking</h3>
+                <p>Select rental dates and calculate your estimated price easily.</p>
+            </div>
+
+            <div class="about-feature">
+                <span>♻️</span>
+                <h3>Smart Renting</h3>
+                <p>Make better use of products instead of buying everything.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="about-cta">
+        <h3>Ready to Find What You Need?</h3>
+        <p>Explore our products and discover a smarter way to rent.</p>
+        <a href="#products" class="btn">Explore Products</a>
+    </div>
+
+</section>
+
+<section id="admin" class="admin-section">
+    <h2>Admin Dashboard</h2>
+    <p>Manage all customer bookings in one place.</p>
+
+    <div class="admin-stats">
+        <div class="stat-card">
+            <h3 id="totalBookings">0</h3>
+            <p>Total Bookings</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="confirmedBookings">0</h3>
+            <p>Confirmed Bookings</p>
+        </div>
+    </div>
+
+    <h3>Customer Bookings</h3>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Email</th>
+                    <th>Product ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="adminBookingList">
+                <tr>
+                    <td colspan="8">Loading bookings...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<footer>
+    <h2>RentEasy.</h2>
+    <p>Rent Anything You Need.</p>
+    <p>© 2026 RentEasy. All Rights Reserved.</p>
+</footer>
+
+<script>
+    let allProducts = [];
+
+    async function loadProducts() {
+        const container = document.getElementById("productList");
+
+        try {
+            const response = await fetch("/api/products");
+
+            if (!response.ok) {
+                throw new Error("Unable to load products");
+            }
+
+            allProducts = await response.json();
+            displayProducts(allProducts);
+            fillBookingProducts();
+
+        } catch (error) {
+            container.innerHTML =
+                "<p>Unable to load products. Please refresh the page.</p>";
+            console.error(error);
+        }
+    }
+
+    
+function displayProducts(products) {
+    const container = document.getElementById("productList");
+
+    if (products.length === 0) {
+        container.innerHTML = "<p>No products found.</p>";
+        return;
+    }
+
+    container.innerHTML = products.map(product => `
+        <div class="product-card">
+            <img
+                src="${product.imageUrl}"
+                alt="${product.name}"
+                onerror="console.log('Image failed:', this.src);"
+            >
+
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>${product.category} | ${product.location}</p>
+                <div class="price">₹${product.pricePerDay} / day</div>
+                <button class="btn"
+                    onclick="alert('Booking feature will be added next!')">
+                    Rent Now
+                </button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function filterCategory(category) {
+
+    const filteredProducts = allProducts.filter(product =>
+        product.category.toLowerCase() === category.toLowerCase()
+    );
+
+    displayProducts(filteredProducts);
+
+    document.getElementById("productList").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+    function searchProducts() {
+        const search = document.getElementById("searchInput")
+            .value.toLowerCase().trim();
+
+        const filtered = allProducts.filter(product =>
+            product.name.toLowerCase().includes(search) ||
+            product.category.toLowerCase().includes(search)
+        );
+
+        displayProducts(filtered);
+    }
+
+    document.getElementById("searchInput")
+        .addEventListener("input", searchProducts);
+
+// Fill product dropdown
+function fillBookingProducts() {
+    const dropdown = document.getElementById("bookingProduct");
+
+    dropdown.innerHTML = '<option value="">Choose a product</option>';
+
+    allProducts.forEach(product => {
+        const option = document.createElement("option");
+        option.value = product.id;
+        option.textContent = product.name + " - ₹" + product.pricePerDay + "/day";
+        dropdown.appendChild(option);
+    });
+}
+
+// Calculate estimated rental price
+
+function calculateRentalPrice() {
+    const productId = Number(document.getElementById("bookingProduct").value);
+    const start = document.getElementById("startDate").value;
+    const end = document.getElementById("endDate").value;
+
+    const product = allProducts.find(p => Number(p.id) === productId);
+
+    const preview = document.getElementById("pricePreview");
+
+    if (!product || !start || !end) {
+        preview.textContent = "Estimated Total: ₹0";
+        return;
+    }
+
+    const startDate = new Date(start + "T00:00:00");
+    const endDate = new Date(end + "T00:00:00");
+
+    const days = Math.round(
+        (endDate.getTime() - startDate.getTime()) / 86400000
+    ) + 1;
+
+    if (days <= 0) {
+        preview.textContent = "End date must be after or equal to start date.";
+        return;
+    }
+
+    const total = days * Number(product.pricePerDay);
+
+    preview.textContent =
+        "Estimated Total: ₹" + total.toFixed(2) +
+        " (" + days + " days)";
+}
+
+// Update price when fields change
+document.getElementById("bookingProduct").addEventListener("change", calculateRentalPrice);
+document.getElementById("startDate").addEventListener("change", calculateRentalPrice);
+document.getElementById("endDate").addEventListener("change", calculateRentalPrice);
+
+// Submit booking to Spring Boot backend
+document.getElementById("bookingForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const message = document.getElementById("bookingMessage");
+
+    const booking = {
+        productId: Number(document.getElementById("bookingProduct").value),
+        customerName: document.getElementById("customerName").value.trim(),
+        customerEmail: document.getElementById("customerEmail").value.trim(),
+        startDate: document.getElementById("startDate").value,
+        endDate: document.getElementById("endDate").value
+    };
+
+    if (!booking.productId || !booking.customerName || !booking.customerEmail ||
+        !booking.startDate || !booking.endDate) {
+        message.textContent = "Please fill all booking details.";
+        return;
+    }
+
+    message.textContent = "Submitting booking...";
+
+    try {
+        const response = await fetch("/api/bookings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(booking)
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (!response.ok) {
+            throw new Error(typeof result === "string" ? result : "Booking could not be completed.");
+        }
+
+        message.style.color = "green";
+        message.textContent = "Booking confirmed! Booking ID: " + result.id +
+            " | Total: ₹" + result.totalPrice;
+
+        document.getElementById("bookingForm").reset();
+        calculateRentalPrice();
+
+    } catch (error) {
+        message.style.color = "red";
+        message.textContent = error.message;
+    }
+});
+
+async function loadAdminBookings() {
+    const bookingList = document.getElementById("adminBookingList");
+
+    try {
+        const response = await fetch("/api/bookings");
+
+        if (!response.ok) {
+            throw new Error("Unable to load bookings");
+        }
+
+        const bookings = await response.json();
+
+        document.getElementById("totalBookings").textContent =
+            bookings.length;
+
+        document.getElementById("confirmedBookings").textContent =
+            bookings.filter(b => b.status === "CONFIRMED").length;
+
+        if (bookings.length === 0) {
+            bookingList.innerHTML =
+                '<tr><td colspan="8">No bookings found.</td></tr>';
+            return;
+        }
+
+        bookingList.innerHTML = bookings.map(booking => `
+            <tr>
+                <td>${booking.id}</td>
+                <td>${booking.customerName}</td>
+                <td>${booking.customerEmail}</td>
+                <td>${booking.productId}</td>
+                <td>${booking.startDate}</td>
+                <td>${booking.endDate}</td>
+                <td>₹${booking.totalPrice}</td>
+                <td>${booking.status}</td>
+            </tr>
+        `).join("");
+
+    } catch (error) {
+        bookingList.innerHTML =
+            '<tr><td colspan="8">Unable to load bookings.</td></tr>';
+        console.error("Admin booking error:", error);
+    }
+}
+
+loadAdminBookings();
+loadProducts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentEasy Admin Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f0ff;
+        }
+
+        .login-card {
+            width: 90%;
+            max-width: 420px;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(50,30,100,.12);
+        }
+
+        h1 {
+            color: #5B2CC9;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 8px;
+            color: #171536;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #5B2CC9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #5B2CC9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h1>RentEasy</h1>
+        <p class="subtitle">Admin Login Portal</p>
+
+        <form action="/perform_login" method="post">
+            <label>Username</label>
+            <input type="text" name="username"
+                   placeholder="Enter admin username" required>
+
+            <label>Password</label>
+            <input type="password" name="password"
+                   placeholder="Enter admin password" required>
+
+            <button type="submit">Login to Dashboard</button>
+        </form>
+
+        <a href="/" class="back">Back to Website</a>
+    </div>
+</body>
+</html>
